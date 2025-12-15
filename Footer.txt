@@ -1,0 +1,339 @@
+////Site Footer kodu
+<div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: #fff; padding: 20px; text-align: center; z-index: 2147483647; box-shadow: 0 -5px 20px rgba(0,0,0,0.2); align-items: center; justify-content: center; gap: 20px; border-top: 1px solid #334155;">
+    <span style="font-size: 13px; max-width: 600px; line-height: 1.4;">
+        🍪 Size daha iyi hizmet sunabilmek için çerezleri kullanıyoruz. "Kabul Et" diyerek veri politikamızı onaylamış olursunuz.
+    </span>
+    <button onclick="acceptCookies()" style="background: #22c55e; color: white; border: none; padding: 8px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; transition: 0.2s;">Kabul Et</button>
+</div>
+
+<script>
+
+&nbsp;   // Tarayıcı hafızasını kontrol et, daha önce kabul etmediyse göster
+
+&nbsp;   if (!localStorage.getItem('cookieAccepted\_final')) { 
+
+&nbsp;       document.getElementById('cookie-banner').style.display = 'flex'; 
+
+&nbsp;   }
+
+&nbsp;   
+
+&nbsp;   function acceptCookies() { 
+
+&nbsp;       localStorage.setItem('cookieAccepted\_final', 'true'); // Hafızaya kaydet
+
+&nbsp;       document.getElementById('cookie-banner').style.display = 'none'; // Kutuyu gizle
+
+&nbsp;   }
+
+
+<div id="progressBarContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 6px; background: transparent; z-index: 999999; pointer-events: none;">
+  <div id="myBar" style="height: 100%; background: #0B60B0; width: 0%; box-shadow: 0 0 10px #0B60B0; transition: width 0.1s ease-out;"></div>
+</div>
+<script>
+
+window.addEventListener("scroll", function() {
+
+&nbsp; var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+
+&nbsp; var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+&nbsp; var scrolled = (winScroll / height) \* 100;
+
+&nbsp; document.getElementById("myBar").style.width = scrolled + "%";
+
+});
+
+
+<div id="miniClockPanel" style="position: fixed; bottom: 20px; left: 20px; z-index: 9990; background: rgba(15, 23, 42, 0.95); color: #fff; padding: 15px; border-radius: 8px; border: 1px solid #334155; font-family: 'Courier New', monospace; box-shadow: 0 10px 25px rgba(0,0,0,0.3); min-width: 180px; backdrop-filter: blur(5px);">
+ 
+    <div onclick="document.getElementById('miniClockPanel').style.display='none'" style="position: absolute; top: -10px; right: -10px; background: #ef4444; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); border: 2px solid #fff;">✕</div>
+
+    <div style="font-size: 10px; color: #94a3b8; letter-spacing: 1px; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 5px; font-weight: bold;">🌐 KÜRESEL PİYASA</div>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #cbd5e1;"><span>NY</span><span id="m-ny">00:00</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #cbd5e1;"><span>LON</span><span id="m-lon">00:00</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #38bdf8; font-weight: bold; background: rgba(56, 189, 248, 0.1); padding: 2px 4px; border-radius: 4px; margin: 2px -4px;"><span>ANKARA</span><span id="m-ank">00:00</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #cbd5e1;"><span>TOK</span><span id="m-tok">00:00</span></div>
+    </div>
+</div>
+<script>
+
+function updateMiniClocks() {
+
+&nbsp;   const now = new Date();
+
+&nbsp;   const getHitTime = (zone) => { return now.toLocaleTimeString('tr-TR', { timeZone: zone, hour: '2-digit', minute: '2-digit', second: '2-digit' }); };
+
+&nbsp;   document.getElementById('m-ny').innerText = getHitTime('America/New\_York');
+
+&nbsp;   document.getElementById('m-lon').innerText = getHitTime('Europe/London');
+
+&nbsp;   document.getElementById('m-ank').innerText = getHitTime('Europe/Istanbul');
+
+&nbsp;   document.getElementById('m-tok').innerText = getHitTime('Asia/Tokyo');
+
+}
+
+setInterval(updateMiniClocks, 1000); updateMiniClocks();
+
+
+<div id="scrollTopBtn" onclick="smoothScrollToTop()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</div>
+<style>
+
+&nbsp;   #scrollTopBtn { opacity: 0; visibility: hidden; position: fixed; bottom: 90px; right: 20px; z-index: 9990; width: 50px; height: 50px; background: linear-gradient(135deg, #0B60B0, #004a8f); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(11, 96, 176, 0.4); border: 2px solid rgba(255, 255, 255, 0.1); transition: all 0.4s; }
+
+&nbsp;   #scrollTopBtn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(11, 96, 176, 0.6); }
+
+&nbsp;   #scrollTopBtn.show { opacity: 1; visibility: visible; }
+
+<script>
+
+&nbsp;   window.addEventListener('scroll', function() { var btn = document.getElementById('scrollTopBtn'); if (window.scrollY > 300) btn.classList.add('show'); else btn.classList.remove('show'); });
+
+&nbsp;   function smoothScrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+
+<div class="social-sidebar">
+    <a href="javascript:void(0)" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href))" class="s-icon linkedin"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+    <a href="javascript:void(0)" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href))" class="s-icon twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+    <a href="javascript:void(0)" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(window.location.href))" class="s-icon whatsapp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+    <a href="javascript:window.print()" class="s-icon print"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg></a>
+</div>
+<style>
+
+.social-sidebar { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 2147483647; display: flex; flex-direction: column; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+
+.s-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; background: #333; cursor: pointer; }
+
+.s-icon:hover { width: 55px; }
+
+.linkedin { background: #0077b5; } .twitter { background: #1da1f2; } .whatsapp { background: #25d366; } .print { background: #64748b; }
+
+@media (max-width: 768px) { .social-sidebar { display: none; } }
+
+
+<div id="chat-circle" class="btn btn-raised" onclick="toggleChat()">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+</div>
+<div class="chat-box" id="chat-box-window">
+    <div class="chat-box-header">
+        <span>B-ink Canlı Destek</span>
+        <span class="chat-box-toggle" onclick="toggleChat()" style="cursor:pointer;">✕</span>
+    </div>
+    <div class="chat-box-body">
+        <div class="chat-logs" id="chat-logs">
+            <div class="chat-msg user"><div class="cm-msg-text">Merhaba! 👋<br>Size nasıl yardımcı olabilirim?</div></div>
+        </div>
+    </div>
+    <div class="chat-input">
+        <form onsubmit="return sendMessage(event)">
+            <input type="text" id="chat-input" placeholder="Mesajınızı yazın..." />
+            <button type="submit" class="chat-submit">➤</button>
+        </form>
+    </div>
+</div>
+<style>
+
+\#chat-circle { position: fixed; bottom: 20px; right: 20px; background: #0B60B0; width: 60px; height: 60px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+.chat-box { display: none; background: #fff; position: fixed; right: 20px; bottom: 90px; width: 320px; border-radius: 12px; box-shadow: 0 5px 30px rgba(0,0,0,0.2); z-index: 9999; overflow: hidden; font-family: sans-serif; }
+
+.chat-box-header { background: #0B60B0; padding: 15px; color: white; font-weight: bold; display: flex; justify-content: space-between; }
+
+.chat-box-body { height: 250px; overflow-y: auto; padding: 15px; background: #f9f9f9; }
+
+.chat-input { padding: 10px; border-top: 1px solid #eee; display: flex; background: white; }
+
+\#chat-input { flex: 1; border: 1px solid #ddd; padding: 8px; border-radius: 20px; outline: none; }
+
+.chat-submit { border: none; background: none; color: #0B60B0; font-size: 18px; cursor: pointer; margin-left: 10px; }
+
+.chat-msg { margin-bottom: 10px; clear: both; }
+
+.chat-msg.user .cm-msg-text { background: white; padding: 8px 12px; border-radius: 0 15px 15px 15px; float: left; box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: #333; font-size: 13px; }
+
+.chat-msg.self .cm-msg-text { background: #0B60B0; color: white; padding: 8px 12px; border-radius: 15px 0 15px 15px; float: right; font-size: 13px; }
+
+<script>
+
+function toggleChat() { var box = document.getElementById("chat-box-window"); box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none"; }
+
+function sendMessage(e) {
+
+&nbsp;   e.preventDefault(); var input = document.getElementById("chat-input"); var msg = input.value; if(msg.trim() == '') return;
+
+&nbsp;   var logs = document.getElementById("chat-logs"); logs.innerHTML += '<div class="chat-msg self"><div class="cm-msg-text">' + msg + '</div></div>'; input.value = "";
+
+&nbsp;   var body = document.querySelector(".chat-box-body"); body.scrollTop = body.scrollHeight;
+
+&nbsp;   setTimeout(function() {
+
+&nbsp;       logs.innerHTML += '<div class="chat-msg user"><div class="cm-msg-text">Mesajınız alındı. Temsilcilerimiz en kısa sürede dönüş yapacaktır. ⚡</div></div>';
+
+&nbsp;       body.scrollTop = body.scrollHeight;
+
+&nbsp;   }, 1000); return false;
+
+}
+
+
+<div id="site-preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 999999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease;">
+    <div style="text-align: center;">
+        <div style="font-size: 50px; animation: spin 1s linear infinite;">⚡</div>
+        <h3 style="color: #0B60B0; font-family: sans-serif; margin-top: 10px; font-weight: 800; letter-spacing: 2px;">B-INK ENERJİ</h3>
+    </div>
+</div>
+<style> @keyframes spin { 100% { transform:rotate(360deg); } } </style>
+<script>
+
+&nbsp;   window.addEventListener('load', function () {
+
+&nbsp;       setTimeout(function(){
+
+&nbsp;           var preloader = document.getElementById('site-preloader');
+
+&nbsp;           preloader.style.opacity = '0';
+
+&nbsp;           setTimeout(function(){ preloader.style.display = 'none'; }, 500);
+
+&nbsp;       }, 1000);
+
+&nbsp;   });
+
+
+<div id="darkModeToggle" onclick="toggleTheme()">
+    <div id="toggleIcon">🌙</div>
+</div>
+<style>
+
+&nbsp;   #darkModeToggle { position: fixed; top: 20px; right: 20px; z-index: 2147483647; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.9); border: 1px solid #cbd5e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+
+&nbsp;   #darkModeToggle:hover { transform: scale(1.1) rotate(15deg); }
+
+&nbsp;   
+
+&nbsp;   body.dark-mode { background-color: #0f172a !important; color: #e2e8f0 !important; }
+
+&nbsp;   
+
+&nbsp;   /\* Beyaz Kutular \*/
+
+&nbsp;   body.dark-mode .gh-card, body.dark-mode .post-card, body.dark-mode article, body.dark-mode \[style\*="background: #fff"], body.dark-mode \[style\*="background: white"], body.dark-mode \[style\*="background-color: #fff"] {
+
+&nbsp;       background-color: #1e293b !important; color: #e2e8f0 !important; border-color: #334155 !important;
+
+&nbsp;   }
+
+&nbsp;   
+
+&nbsp;   body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode strong { color: #f8fafc !important; }
+
+&nbsp;   body.dark-mode p, body.dark-mode li { color: #cbd5e1 !important; }
+
+&nbsp;   
+
+&nbsp;   /\* ÖZEL INPUT DÜZELTMESİ (GHOST \& CUSTOM) \*/
+
+&nbsp;   body.dark-mode input, body.dark-mode textarea, body.dark-mode select, 
+
+&nbsp;   body.dark-mode .gh-input, body.dark-mode .gh-portal-input {
+
+&nbsp;       background-color: #334155 !important; 
+
+&nbsp;       color: #ffffff !important; 
+
+&nbsp;       border-color: #475569 !important;
+
+&nbsp;   }
+
+&nbsp;   
+
+&nbsp;   /\* Placeholder (Gri Yazı) Rengi \*/
+
+&nbsp;   body.dark-mode ::placeholder, 
+
+&nbsp;   body.dark-mode .gh-input::placeholder,
+
+&nbsp;   body.dark-mode input::placeholder {
+
+&nbsp;       color: #cbd5e1 !important;
+
+&nbsp;       opacity: 1;
+
+&nbsp;   }
+
+&nbsp;   
+
+&nbsp;   /\* Özel Modüller \*/
+
+&nbsp;   body.dark-mode #cookie-consent-box, body.dark-mode .chat-box, body.dark-mode #miniClockPanel {
+
+&nbsp;       background-color: #1e293b !important; color: #fff !important; border-color: #475569 !important;
+
+&nbsp;   }
+
+&nbsp;   body.dark-mode .chat-msg.user .cm-msg-text { background-color: #334155 !important; color: #fff !important; }
+
+&nbsp;   body.dark-mode a { color: #38bdf8 !important; }
+
+&nbsp;   body.dark-mode canvas { filter: invert(0); }
+
+<script>
+
+&nbsp;   const currentTheme = localStorage.getItem('theme');
+
+&nbsp;   const toggleIcon = document.getElementById('toggleIcon');
+
+&nbsp;   if (currentTheme === 'dark') { document.body.classList.add('dark-mode'); toggleIcon.innerText = '☀️'; }
+
+&nbsp;   function toggleTheme() {
+
+&nbsp;       document.body.classList.toggle('dark-mode');
+
+&nbsp;       if (document.body.classList.contains('dark-mode')) { localStorage.setItem('theme', 'dark'); toggleIcon.innerText = '☀️'; } 
+
+&nbsp;       else { localStorage.setItem('theme', 'light'); toggleIcon.innerText = '🌙'; }
+
+&nbsp;   }
+
+<div id="qr-card" style="position: fixed; bottom: 160px; right: 20px; background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); z-index: 2147483647; border: 2px solid #0B60B0; text-align: center; width: 130px; display: none;">
+ 
+    <div onclick="document.getElementById('qr-card').style.display='none'" style="position: absolute; top: -10px; right: -10px; background: #ef4444; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">✕</div>
+ 
+    <p style="margin: 0 0 8px 0; font-size: 10px; font-weight: 800; color: #0B60B0;">MOBİL SİTE</p>
+ 
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://unpetulantly-unsinkable-hope.ngrok-free.dev"
+         alt="QR Code"
+         style="width: 100px; height: 100px; display: block; margin: 0 auto; border-radius: 4px;">
+ 
+    <p style="margin: 5px 0 0 0; font-size: 9px; color: #64748b;">Kameranı Okut</p>
+</div>
+
+<script>
+
+// Sadece Bilgisayarda (Geniş Ekran) Göster
+
+if(window.innerWidth > 768) {
+
+&nbsp;   setTimeout(function(){ 
+
+&nbsp;       document.getElementById("qr-card").style.display = "block"; 
+
+&nbsp;   }, 1000);
+
+}
+
+
+<style>
+
+/\* Mobilde garanti gizle \*/
+
+@media (max-width: 768px) {
+
+&nbsp;   #qr-card { display: none !important; }
+
+}
+
